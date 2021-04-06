@@ -23,6 +23,7 @@ namespace Models
         protected string emailAdress {get; set; }
 
         [Required]
+        [Range(1, 3)]
         private int levelAccess {get; set; }
     }
 }
