@@ -7,7 +7,7 @@ using DublinBikes.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace DublinBikes.Controllers
+namespace Controllers
 {
     public class HomeController : Controller
     {
