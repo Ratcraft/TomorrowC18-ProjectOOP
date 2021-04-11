@@ -1,22 +1,23 @@
-using TomorrowC18ProjectOOPclear.Models;
-using Microsoft.EntityFrameworkCore;
+using TomorrowC18ProjectOOP.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Models;
 
 namespace Data
 {
-    public class MvcBikeContext : DbContext
+    public class Context : DbContext
     {
-        public Context(DbContextOptions<MvcBikeContext> options) : base(options)
+        public Context(DbContextOptions<Context> options) : base(options)
         {
 
         }
 
-        public DbSet<TomorrowC18ProjectOOP> Profile { get; set; }
-        public DbSet<TomorrowC18ProjectOOP> Student { get; set; }
-        public DbSet<TomorrowC18ProjectOOP> Teacher { get; set; }
-        public DbSet<TomorrowC18ProjectOOP> Admin { get; set; }
+        public DbSet<Profile> Profile { get; set; }
+        public DbSet<Student> Student { get; set; }
+        public DbSet<Teacher> Teacher { get; set; }
+        public DbSet<Admin> Admin { get; set; }
     }
 }
