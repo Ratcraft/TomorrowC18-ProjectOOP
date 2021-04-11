@@ -2,7 +2,7 @@ using System;
 
 namespace Models
 {
-    public class Profile
+    public abstract class Profile
     {
         [Required]
         protected string firstName {get; set; }
