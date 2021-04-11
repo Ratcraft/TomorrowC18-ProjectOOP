@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
-    public class HomeController1 : Controller
+    public class StudentController : Controller
     {
         public IActionResult Index()
         {
