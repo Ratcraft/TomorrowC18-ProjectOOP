@@ -13,7 +13,6 @@ namespace Data
         {
 
         }
-
         public DbSet<Profile> Profile { get; set; }
         public DbSet<Student> Student { get; set; }
         public DbSet<Teacher> Teacher { get; set; }

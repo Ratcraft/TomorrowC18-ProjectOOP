@@ -7,13 +7,13 @@ namespace Models
     public class Student : Profile
     {
         [Required]
-        protected string group {get; set; }
+        public string group {get; set; }
 
         [Required]
-        protected int progress {get; set; }
+        public int progress {get; set; }
 
         [Required]
-        protected Dictionary<string, double> subjectList {get; set; }
+        public string subjectList {get; set; }
     }
 }
 

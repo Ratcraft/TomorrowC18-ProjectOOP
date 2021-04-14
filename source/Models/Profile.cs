@@ -6,29 +6,29 @@ namespace Models
 {
     public abstract class Profile
     {
-        [Required]
-        protected string firstName {get; set; }
+        [Key]
+        public int id {get; set; }
 
         [Required]
-        protected string lastName {get; set; }
+        public string firstName {get; set; }
 
         [Required]
-        protected string birthDate {get; set; }
+        public string lastName {get; set; }
 
         [Required]
-        protected string sex {get; set; }
+        public string birthDate {get; set; }
 
         [Required]
-        protected string userName {get; set; }
+        public string sex {get; set; }
 
         [Required]
-        protected string emailAdress {get; set; }
+        public string userName {get; set; }
 
         [Required]
-        protected int id {get; set; }
+        public string emailAdress {get; set; }
 
         [Required]
-        protected string password {get; set; }
+        public string password {get; set; }
 
         [Required]
         [Range(1, 3)]
