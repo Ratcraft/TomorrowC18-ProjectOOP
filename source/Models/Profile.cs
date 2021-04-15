@@ -30,6 +30,8 @@ namespace Models
         [Required]
         public string password {get; set; }
 
+        public string passwordHash { get; set; }
+
         [Required]
         [Range(1, 3)]
         private int levelAccess {get; set; }
