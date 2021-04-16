@@ -30,6 +30,7 @@ namespace Models
                         sex = "man",
                         emailAdress = "ouioui@oui.fr",
                         password = "bonjour",
+                        passwordHash = "ntm",
                         group = "TS4",
                         progress = 12,
                         subjectList = "Math, Bio"
