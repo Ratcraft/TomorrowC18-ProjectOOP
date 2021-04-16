@@ -18,9 +18,9 @@ namespace TomorrowC18ProjectOOP.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Student.ToListAsync());
+            return View();
         }
         
         public IActionResult Create()
