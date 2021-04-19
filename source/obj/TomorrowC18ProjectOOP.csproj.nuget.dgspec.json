@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Louis6775\\Desktop\\TomorrowC18-ProjectOOP\\source\\TomorrowC18ProjectOOP.csproj": {}
+    "C:\\Users\\leome\\TomorrowC18-ProjectOOP\\source\\TomorrowC18ProjectOOP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Louis6775\\Desktop\\TomorrowC18-ProjectOOP\\source\\TomorrowC18ProjectOOP.csproj": {
+    "C:\\Users\\leome\\TomorrowC18-ProjectOOP\\source\\TomorrowC18ProjectOOP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Louis6775\\Desktop\\TomorrowC18-ProjectOOP\\source\\TomorrowC18ProjectOOP.csproj",
+        "projectUniqueName": "C:\\Users\\leome\\TomorrowC18-ProjectOOP\\source\\TomorrowC18ProjectOOP.csproj",
         "projectName": "TomorrowC18ProjectOOP",
-        "projectPath": "C:\\Users\\Louis6775\\Desktop\\TomorrowC18-ProjectOOP\\source\\TomorrowC18ProjectOOP.csproj",
-        "packagesPath": "C:\\Users\\Louis6775\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Louis6775\\Desktop\\TomorrowC18-ProjectOOP\\source\\obj\\",
+        "projectPath": "C:\\Users\\leome\\TomorrowC18-ProjectOOP\\source\\TomorrowC18ProjectOOP.csproj",
+        "packagesPath": "C:\\Users\\leome\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\leome\\TomorrowC18-ProjectOOP\\source\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Louis6775\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\leome\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -81,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }
