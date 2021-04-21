@@ -4,22 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace Models
+namespace TomorrowC18ProjectOOP.Models
 {
-    public class Fee
+    public class Result
     {
         [Key]
         [Required]
-        public int id { get; set; }
+        public int Id { get; set; }
         [Required]
-        public int facultyId { get; set; }
+        public int StudentId { get; set; }
         [Required]
-        public int amount { get; set; }
-        [Required]
-        public DateTime paymentDate { get; set; }
+        public string CourseName { get; set; }
+        public double Average { get; set; }
     }
 }
-
 
 /*
 Edited by Tony

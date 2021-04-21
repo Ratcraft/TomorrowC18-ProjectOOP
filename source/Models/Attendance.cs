@@ -9,8 +9,11 @@ namespace Models
     public class Attendance
     {
         [Key]
+        [Required]
         public int id { get; set; }
+        [Required]
         public int courseId { get; set; }
+        [Required]
         public int facultyId { get; set; }
         public string status { get; set; }
     }
