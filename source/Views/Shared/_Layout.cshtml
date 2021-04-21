@@ -5,34 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TomorrowC18ProjectOOP</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/oui.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TomorrowC18ProjectOOP</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Student</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AcademicCalendar" asp-action="Index">Academic Calendar</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <nav class="navbar">
+            <ul class="navbar-menu">
+                <li class="navbar-item logo">
+                    <a class="navbar-link" asp-area="" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-anchor navbar-icon"></i>
+                        <span class="navbar-title">Anchor</span>
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a class="navbar-link" asp-area="" asp-controller="Student" asp-action="Index">
+                        <i class="fas fa-user-graduate navbar-icon"></i>
+                        <span class="navbar-title">Profile</span>
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a class="navbar-link" asp-area="" asp-controller="AcademicCalendar" asp-action="Index">
+                        <i class="far fa-calendar-alt navbar-icon"></i>
+                        <span class="navbar-title">Academic Calendar</span>
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a class="navbar-link" asp-area="" asp-controller="Course" asp-action="Index">
+                        <i class="fas fa-book navbar-icon"></i>
+                        <span class="navbar-title">Courses</span>
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a class="navbar-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                        <i class="fas fa-arrow-right navbar-icon"></i>
+                        <span class="navbar-title">Privacy</span>
+                    </a>
+                </li>
+            </ul>
         </nav>
     </header>
     <div class="container">
@@ -40,12 +53,6 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - TomorrowC18ProjectOOP - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
