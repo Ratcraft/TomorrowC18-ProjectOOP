@@ -2,7 +2,7 @@
 
 namespace TomorrowC18ProjectOOP.Migrations
 {
-    public partial class DateTimeAdd : Migration
+    public partial class AcademicCalendar : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

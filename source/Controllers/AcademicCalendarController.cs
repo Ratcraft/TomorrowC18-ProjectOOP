@@ -35,7 +35,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id, Event, Date")] AcademicCalendar academicCalendar)
+        public async Task<IActionResult> Create([Bind("Id, Event, StartDate, EndDate")] AcademicCalendar academicCalendar)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id, Event, Date")] AcademicCalendar academicCalendar)
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Event, StartDate, EndDate")] AcademicCalendar academicCalendar)
         {
             if (id != academicCalendar.Id)
             {

@@ -14,6 +14,8 @@ namespace Models
         [StringLength(30)]
         public string Event { get; set; }
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime StartDate { get; set; }
+        [Required]
+        public DateTime EndDate { get; set; }
     }
 }
