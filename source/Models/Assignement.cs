@@ -6,23 +6,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Models
 {
-    public class Course
+    public class Assignement
     {
         [Key]
         [Required]
         public int id { get; set; }
         [Required]
-        public int teacherId { get; set; }
+        public int studentId { get; set; }
         [Required]
-        public DateTime begin { get; set; }
+        public string CourseName { get; set; }
         [Required]
-        public DateTime end { get; set; }
-        [Required]
-        public string courseName { get; set; }
-        public string description { get; set; }
+        public DateTime Date { get; set; }
     }
 }
-
-/*
-Edited by Tony
-*/

@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Builder;
+using Models;
 
 namespace TomorrowC18ProjectOOP
 {
@@ -28,6 +31,9 @@ namespace TomorrowC18ProjectOOP
             services.AddControllersWithViews();
             services.AddDbContext<Context>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("Context")));
+
+            /*services.AddIdentity<Profile, IdentityRole>()
+                .AddEntityFrameworkStores<Context>();*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +52,8 @@ namespace TomorrowC18ProjectOOP
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseRouting();
 

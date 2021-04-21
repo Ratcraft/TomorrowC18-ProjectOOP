@@ -75,7 +75,7 @@ main{
     min-width: 2rem;
     margin: 0 1.5rem;
     color:var(--navbar-icon-color);
-    transition:var(--navbar-transition-speed);
+    transition:var(--navbar-transition-speed) ease;
 }
 
 .navbar-title{

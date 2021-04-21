@@ -4,15 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace OOP_moodle.Models
+namespace Models
 {
     public class Attendance
     {
         [Key]
-        public int Id { get; set; }
-        public int CourseId { get; set; }
-        public int FacultyId { get; set; }
-        public string Status { get; set; }
+        [Required]
+        public int id { get; set; }
+        [Required]
+        public int courseId { get; set; }
+        [Required]
+        public int facultyId { get; set; }
+        public string status { get; set; }
     }
 }
 
