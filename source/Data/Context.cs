@@ -18,8 +18,8 @@ namespace Data
         public DbSet<Teacher> Teacher { get; set; }
         public DbSet<Admin> Admin { get; set; }
         public DbSet<AcademicCalendar> AcademicCalendar { get; set; }
-        public DBSet<Course> Course {get; set; }
-        public DBSet<Attendance> Attendance {get; set; }
-        public DBSet<Fee> Fee {get; set; }
+        public DbSet<Course> Course {get; set; }
+        public DbSet<Attendance> Attendance {get; set; }
+        public DbSet<Fee> Fee {get; set; }
     }
 }

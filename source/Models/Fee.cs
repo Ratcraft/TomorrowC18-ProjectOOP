@@ -4,15 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace OOP_moodle.Models
+namespace Models
 {
     public class Fee
     {
         [Key]
-        public int Id { get; set; }
-        public int FacultyId { get; set; }
-        public int Amount { get; set; }
-        public DateTime PaymentDate { get; set; }
+        public int id { get; set; }
+        public int facultyId { get; set; }
+        public int amount { get; set; }
+        public DateTime paymentDate { get; set; }
     }
 }
 

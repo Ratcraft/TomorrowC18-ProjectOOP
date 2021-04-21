@@ -33,7 +33,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id, FacultyId, Amount, PaymantDate")] fee fee)
+        public async Task<IActionResult> Create([Bind("Id, FacultyId, Amount, PaymantDate")] Fee fee)
         {
             if (ModelState.IsValid)
             {
@@ -65,9 +65,9 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id, FacultyId, Amount, PaymantDate")] fee fee)
+        public async Task<IActionResult> Edit(int Id, [Bind("id, facultyId, amount, paymentDate")] Fee fee)
         {
-            if (id != fee.id)
+            if (Id != fee.id)
             {
                 return NotFound();
             }

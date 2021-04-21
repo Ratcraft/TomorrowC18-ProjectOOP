@@ -4,17 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace OOP_moodle.Models
+namespace Models
 {
     public class Course
     {
         [Key]
-        public int Id { get; set; }
-        public int TeacherId { get; set; }
-        public DateTime Begin { get; set; }
-        public DateTime End { get; set; }
-        public string CourseName { get; set; }
-        public string Description { get; set; }
+        public int id { get; set; }
+        public int teacherId { get; set; }
+        public DateTime begin { get; set; }
+        public DateTime end { get; set; }
+        public string courseName { get; set; }
+        public string description { get; set; }
     }
 }
 
