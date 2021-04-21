@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
-    public class feeController : Controller
+    public class FeeController : Controller
     {
         private readonly Context _context;
 
@@ -28,7 +28,7 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View();
         }
 
-        // POST: fee/Create
+        // POST: Fee/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -44,7 +44,7 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(fee);
         }
 
-        // GET: fee/Edit/5
+        // GET: Fee/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
