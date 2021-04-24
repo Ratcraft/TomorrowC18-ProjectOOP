@@ -19,9 +19,9 @@ namespace TomorrowC18ProjectOOP.Controllers
         }
 
         // Get : AcademicCalendar
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.AcademicCalendar.ToListAsync());
+            return View();
         }
 
         // GET: AcademicCalendar/Create
