@@ -11,12 +11,18 @@ namespace Models
         [Key]
         [Required]
         public int id { get; set; }
+
         [Required]
         public int facultyId { get; set; }
+
         [Required]
         public int amount { get; set; }
+
         [Required]
-        public DateTime paymentDate { get; set; }
+        public DateTime deadline { get; set; }
+
+        [Required]
+        public string description { get; set; }
     }
 }
 
