@@ -6,23 +6,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Models
 {
-    public class Exam
+    public class Payment
     {
         [Key]
         [Required]
-        public int Id { get; set; }
+        public int id { get; set; }
 
         [Required]
-        public int StudentId { get; set; }
+        public int facultyId { get; set; }
 
         [Required]
-        public string CourseName { get; set; }
+        public int amount { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
-
-        public double Grade { get; set; }
-        
+        public DateTime paymentDate { get; set; }
     }
 }
 
