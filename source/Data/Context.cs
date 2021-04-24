@@ -27,5 +27,6 @@ namespace Data
         public DbSet<Assignement> Assignement { get; set; }
         public DbSet<Exam> Exam { get; set; }
         public DbSet<Result> Result { get; set; }
+        public DbSet<TimeTable> TimeTable { get; set; }
     }
 }
