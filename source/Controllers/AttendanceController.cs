@@ -20,7 +20,7 @@ namespace TomorrowC18ProjectOOP.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(_context.Attendance.ToListAsync());
         }
         
         public IActionResult Create()
@@ -33,7 +33,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id, CourseId, FacultyId, Status")] Attendance attendance)
+        public async Task<IActionResult> Create([Bind("id, courseId, facultyId, status")] Attendance attendance)
         {
             if (ModelState.IsValid)
             {
@@ -109,6 +109,23 @@ namespace TomorrowC18ProjectOOP.Controllers
         private bool AttendanceExists(int id)
         {
             return _context.Attendance.Any(e => e.id == id);
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var attendance = await _context.Attendance
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (attendance == null)
+            {
+                return NotFound();
+            }
+
+            return View(attendance);
         }
     }
 }

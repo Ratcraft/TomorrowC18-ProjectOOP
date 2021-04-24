@@ -14,6 +14,8 @@ namespace Models
         [Required]
         public int teacherId { get; set; }
         [Required]
+        public int studentId { get; set; }
+        [Required]
         public DateTime begin { get; set; }
         [Required]
         public DateTime end { get; set; }
