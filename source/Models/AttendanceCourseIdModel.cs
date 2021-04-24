@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Models;
 
-namespace TomorrowC18ProjectOOP.Models
+namespace Models
 {
     public class AttendanceCourseIdModel
     {
