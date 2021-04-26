@@ -31,8 +31,8 @@ namespace TomorrowC18ProjectOOP
             services.AddDbContext<Context>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("Context")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<Context>();   
+            /*services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<Context>();  */ 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
