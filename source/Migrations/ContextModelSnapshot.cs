@@ -457,6 +457,30 @@ namespace TomorrowC18ProjectOOP.Migrations
                     b.ToTable("Result");
                 });
 
+            modelBuilder.Entity("Models.TimeTable", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("End")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TimeTable");
+                });
+
             modelBuilder.Entity("Models.Admin", b =>
                 {
                     b.HasBaseType("Models.Profile");
