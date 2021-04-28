@@ -18,11 +18,11 @@ namespace TomorrowC18ProjectOOP.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _context.Fee.ToListAsync());
         }
-        
+
         public IActionResult Create()
         {
             return View();
@@ -92,6 +92,41 @@ namespace TomorrowC18ProjectOOP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            return View(fee);
+        }
+
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var fee = await _context.Fee
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (fee == null)
+            {
+                return NotFound();
+            }
+
+            return View(fee);
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var fee = await _context.Fee
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (fee == null)
+            {
+                return NotFound();
+            }
+
             return View(fee);
         }
 
