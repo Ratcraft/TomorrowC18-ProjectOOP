@@ -53,11 +53,11 @@
                 </li>
                 @if (signInManager.IsSignedIn(User))
                 {
-                        <li class="nav-item">
-                            <form method="post" asp-action="logout" asp-controller="account">
-                                <button type ="submit" class="nav-link btn btn-link py-0" style="width:auto">
-                                    Logout @User.Identity.Name
-
+                        <li class="navbar-item">
+                            <form method="post" asp-action="logout" asp-controller="account" class="navbar-link">
+                                <button type ="submit" style="width:auto">
+                                    <i class="fas fa-sign-in-alt navbar-icon"></i>
+                                    <span class="navbar-title">Logout @User.Identity.Name</span>
                                 </button>
                             </form>
                         </li>
@@ -65,19 +65,17 @@
                 }
                 else
                 {
-                    <li class="nav-item">
-                        <a asp-action"login" asp-controller="Account" asp-action="Login" class="nav-link">Login</a>
+                    <li class="navbar-item">
+                        <a asp-action"login" asp-controller="Account" class="navbar-link">
+                            <i class="fas fa-sign-in-alt navbar-icon"></i>
+                            <span class="navbar-title">Login</span>
+                        </a>
                     </li>
                 }
-                <li class="navbar-item">
-                    <a class="navbar-link" asp-area="" asp-controller="Account" asp-action="Register">
-                        <i class="fas fa-sign-in-alt navbar-icon"></i>
-                        <span class="navbar-title">Register</span>
-                    </a>
-                </li>
+                
                 <li class="navbar-item">
                     <a class="navbar-link" asp-area="" asp-controller="Form" asp-action="Create">
-                        <i class="fas fa-sign-in-alt navbar-icon"></i>
+                        <i class="fas fa-envelope-open-text navbar-icon"></i>
                         <span class="navbar-title">Contact us</span>
                     </a>
                 </li>
