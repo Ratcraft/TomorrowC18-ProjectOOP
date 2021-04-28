@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="navbar-item">
-                    <a class="navbar-link" asp-area="" asp-controller="TimeTable" asp-action="Index">
+                    <a class="navbar-link" asp-area="" asp-controller="TimeTables" asp-action="Index">
                         <i class="far fa-calendar-alt navbar-icon"></i>
                         <span class="navbar-title">Time Table</span>
                     </a>
@@ -74,6 +74,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Head", required: false)
 </body>
 </html>
