@@ -1,0 +1,52 @@
+@model Models.Form
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Payments and Fees</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="requestType" class="control-label"></label>
+                <input asp-for="requestType" class="form-control" />
+                <span asp-validation-for="requestType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="requestMessage" class="control-label"></label>
+                <input asp-for="requestMessage" class="form-control" />
+                <span asp-validation-for="requestMessage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container-form">
+    <form action="https://formspree.io/f/moqyvlen" method="POST" id="email-form">
+        <label for=""></label>
+        <input type="email" id="email" name="email" placeholder="email address">
+        <input type="text" id="reportMessage" name="reportMessage" placeholder="Your message">
+        <button type="submit" class="btn btn-solid btn-rounded"><i class="fas fa-arrow-right"></i> Subscribe</button>   
+        </form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

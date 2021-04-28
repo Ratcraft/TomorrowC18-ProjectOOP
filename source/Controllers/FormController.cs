@@ -9,42 +9,44 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
-    public class FeeController : Controller
+    public class FormController : Controller
     {
         private readonly Context _context;
 
-        public FeeController(Context context)
+        public FormController(Context context)
         {
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        // Get : form
+        public IActionResult Index()
         {
-            return View(await _context.Fee.ToListAsync());
+            return View();
         }
 
+        // GET: form/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Fee/Create
+        // POST: form/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // For more details, see http://go.microsoft.com/fwlink/?Linkid=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id, facultyId, amount, deadline, description")] Fee fee)
+        public async Task<IActionResult> Create([Bind("id, Event, StartDate, EndDate")] Form form)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(fee);
+                _context.Add(form);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(fee);
+            return View(form);
         }
 
-        // GET: Fee/Edit/5
+        // GET: form/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -52,22 +54,22 @@ namespace TomorrowC18ProjectOOP.Controllers
                 return NotFound();
             }
 
-            var fee = await _context.Fee.FindAsync(id);
-            if (fee == null)
+            var form = await _context.Form.FindAsync(id);
+            if (form == null)
             {
                 return NotFound();
             }
-            return View(fee);
+            return View(form);
         }
 
-        // POST: fee/Edit/5
+        // POST: form/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // For more details, see http://go.microsoft.com/fwlink/?Linkid=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int Id, [Bind("id, facultyId, amount, description, deadline")] Fee fee)
+        public async Task<IActionResult> Edit(int id, [Bind("id, Event, StartDate, EndDate")] Form form)
         {
-            if (Id != fee.id)
+            if (id != form.id)
             {
                 return NotFound();
             }
@@ -76,12 +78,12 @@ namespace TomorrowC18ProjectOOP.Controllers
             {
                 try
                 {
-                    _context.Update(fee);
+                    _context.Update(form);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FeeExists(fee.id))
+                    if (!formExists(form.id))
                     {
                         return NotFound();
                     }
@@ -92,27 +94,10 @@ namespace TomorrowC18ProjectOOP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(fee);
+            return View(form);
         }
 
-
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var fee = await _context.Fee
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (fee == null)
-            {
-                return NotFound();
-            }
-
-            return View(fee);
-        }
-
+        // GET: form/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -120,30 +105,30 @@ namespace TomorrowC18ProjectOOP.Controllers
                 return NotFound();
             }
 
-            var fee = await _context.Fee
+            var form = await _context.Form
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (fee == null)
+            if (form == null)
             {
                 return NotFound();
             }
 
-            return View(fee);
+            return View(form);
         }
 
-        // POST: fee/Delete/5
+        // POST: form/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var fee = await _context.Fee.FindAsync(id);
-            _context.Fee.Remove(fee);
+            var form = await _context.Form.FindAsync(id);
+            _context.Form.Remove(form);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FeeExists(int id)
+        private bool formExists(int id)
         {
-            return _context.Fee.Any(e => e.id == id);
+            return _context.Form.Any(e => e.id == id);
         }
     }
 }

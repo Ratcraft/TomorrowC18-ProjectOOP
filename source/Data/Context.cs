@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Data
 {
-    public class Context : DbContext
+    public class Context : IdentityDbContext
     {
         public Context(DbContextOptions<Context> options) : base(options)
         {
@@ -34,5 +34,6 @@ namespace Data
         public DbSet<Result> Result { get; set; }
         public DbSet<TimeTable> TimeTable { get; set; }
         public DbSet<Events> Events { get; set; }
+        public DbSet<Form> Form {get; set; }
     }
 }
