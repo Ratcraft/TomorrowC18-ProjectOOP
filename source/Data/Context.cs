@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Data
 {
-    public class Context : IdentityDbContext
+    public class Context : IdentityDbContext<Profile>
     {
         public Context(DbContextOptions<Context> options) : base(options)
         {

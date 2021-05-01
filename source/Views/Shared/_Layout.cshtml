@@ -1,4 +1,4 @@
-﻿@inject SignInManager<IdentityUser> signInManager;
+﻿@inject SignInManager<Profile> signInManager;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,28 +51,34 @@
                         <span class="navbar-title">Payment</span>
                     </a>
                 </li>
-                @if (signInManager.IsSignedIn(User))
+                @if (signInManager.IsSignedIn(User)) 
                 {
-                        <li class="navbar-item">
-                            <form method="post" asp-action="logout" asp-controller="account" class="navbar-link">
-                                <button type ="submit" style="width:auto">
-                                    <i class="fas fa-sign-in-alt navbar-icon"></i>
-                                    <span class="navbar-title">Logout @User.Identity.Name</span>
-                                </button>
-                            </form>
-                        </li>
+                    <li class="navbar-item">
+                        <form method="post" asp-action="logout" asp-controller="account" class="navbar-link">
+                            <button type="submit" style="width:auto">
+                                <i class="fas fa-sign-in-alt navbar-icon"></i>
+                                <span class="navbar-title">Logout @User.Identity.Name</span>
+                            </button>
+                        </form>
+                    </li>
 
                 }
                 else
                 {
                     <li class="navbar-item">
-                        <a asp-action"login" asp-controller="Account" class="navbar-link">
+                        <a asp-action"login" asp-controller="Account" asp-action="Login" class="navbar-link">
                             <i class="fas fa-sign-in-alt navbar-icon"></i>
                             <span class="navbar-title">Login</span>
                         </a>
                     </li>
+                    <li class="navbar-item">
+                        <a asp-action"Register" asp-controller="Account" asp-action="Register" class="navbar-link">
+                            <i class="fas fa-sign-in-alt navbar-icon"></i>
+                            <span class="navbar-title">Register</span>
+                        </a>
+                    </li>
                 }
-                
+
                 <li class="navbar-item">
                     <a class="navbar-link" asp-area="" asp-controller="Form" asp-action="Create">
                         <i class="fas fa-envelope-open-text navbar-icon"></i>

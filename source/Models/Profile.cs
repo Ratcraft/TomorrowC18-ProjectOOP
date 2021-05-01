@@ -1,13 +1,12 @@
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 
 namespace Models
 {
-    public abstract class Profile
+    public class Profile : IdentityUser
     {
-        [Key]
-        public int id {get; set; }
 
         [Required]
         public string firstName {get; set; }
@@ -20,17 +19,6 @@ namespace Models
 
         [Required]
         public string sex {get; set; }
-
-        [Required]
-        public string userName {get; set; }
-
-        [Required]
-        public string emailAdress {get; set; }
-
-        [Required]
-        public string password {get; set; }
-
-        public string passwordHash { get; set; }
 
         [Required]
         [Range(1, 3)]

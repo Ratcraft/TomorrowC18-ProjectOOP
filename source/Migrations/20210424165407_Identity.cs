@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TomorrowC18ProjectOOP.Migrations
@@ -330,4 +330,3 @@ namespace TomorrowC18ProjectOOP.Migrations
         }
     }
 }
-*/
