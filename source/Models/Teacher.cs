@@ -7,10 +7,10 @@ namespace Models
     public class Teacher : Profile
     {
         [Required]
-        protected string subject {get; set; }
+        public string subject {get; set; }
 
         [Required]
-        protected List<string> groupList {get; set; }
+        public string groupList {get; set; }
     }
 }
 

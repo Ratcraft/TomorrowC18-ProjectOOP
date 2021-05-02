@@ -22,7 +22,7 @@ namespace Models
 
         [Required]
         [Range(1, 3)]
-        private int levelAccess {get; set; }
+        public int levelAccess {get; set; }
     }
 }
 

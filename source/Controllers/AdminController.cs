@@ -11,6 +11,8 @@ namespace TomorrowC18ProjectOOP.Controllers
 {
     public class AdminController : Controller
     {
+
+
         private readonly Context _context;
 
         public AdminController(Context context)

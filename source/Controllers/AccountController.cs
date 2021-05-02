@@ -13,6 +13,13 @@ namespace TomorrowC18ProjectOOP.Controllers
         private readonly UserManager<Profile> userManager;
         private readonly SignInManager<Profile> signInManager;
 
+        public IActionResult Index()
+        {
+            var userid = userManager.GetUserId(HttpContext.User);
+            Profile user = userManager.FindByIdAsync(userid).Result;
+            return View(user);
+        }
+
         public AccountController(UserManager<Profile> userManager, SignInManager<Profile> signInManager)
         {
             this.userManager = userManager;
