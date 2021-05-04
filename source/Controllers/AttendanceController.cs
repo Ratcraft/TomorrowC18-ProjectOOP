@@ -18,11 +18,12 @@ namespace TomorrowC18ProjectOOP.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_context.Attendance.ToListAsync());
+            return View(await _context.Attendance.ToListAsync());
         }
-        
+
+
         public IActionResult Create()
         {
             return View();
@@ -65,7 +66,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id, CourseId, FacultyId, Status")] Attendance attendance)
+        public async Task<IActionResult> Edit(int id, [Bind("id, courseId, facultyId, status")] Attendance attendance)
         {
             if (id != attendance.id)
             {
@@ -96,6 +97,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         }
 
         // POST: Attendance/Delete/5
+        /*
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -105,10 +107,36 @@ namespace TomorrowC18ProjectOOP.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        */
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var attendance = await _context.Attendance
+                .FirstOrDefaultAsync(a => a.id == id);
+            if (attendance == null)
+            {
+                return NotFound();
+            }
+
+            return View(attendance);
+        }
         private bool AttendanceExists(int id)
         {
             return _context.Attendance.Any(e => e.id == id);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var attendance = await _context.Attendance.FindAsync(id);
+            _context.Attendance.Remove(attendance);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Details(int? id)

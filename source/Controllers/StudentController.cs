@@ -65,9 +65,9 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess, group, progress, subjectList")] Student student)
+        public async Task<IActionResult> Edit(string id, [Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess, group, progress, subjectList")] Student student)
         {
-            if (id != student.id)
+            if (id != student.Id)
             {
                 return NotFound();
             }
@@ -81,7 +81,7 @@ namespace TomorrowC18ProjectOOP.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StudentExists(student.id))
+                    if (!StudentExists(student.Id))
                     {
                         return NotFound();
                     }
@@ -98,7 +98,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // POST: student/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var student = await _context.Student.FindAsync(id);
             _context.Student.Remove(student);
@@ -106,9 +106,9 @@ namespace TomorrowC18ProjectOOP.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StudentExists(int id)
+        private bool StudentExists(string id)
         {
-            return _context.Student.Any(e => e.id == id);
+            return _context.Student.Any(e => e.Id == id);
         }
     }
 }

@@ -10,10 +10,17 @@ namespace TomorrowC18ProjectOOP.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<Profile> userManager;
+        private readonly SignInManager<Profile> signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public IActionResult Index()
+        {
+            var userid = userManager.GetUserId(HttpContext.User);
+            Profile user = userManager.FindByIdAsync(userid).Result;
+            return View(user);
+        }
+
+        public AccountController(UserManager<Profile> userManager, SignInManager<Profile> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -38,7 +45,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                var user = new Profile { UserName = model.Email, Email = model.Email };
                 var result = await userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded) 

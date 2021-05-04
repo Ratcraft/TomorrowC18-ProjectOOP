@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
-namespace Project.Controllers
+namespace TomorrowC18ProjectOOP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -23,18 +23,18 @@ namespace Project.Controllers
 
         // GET: api/CalendarEvents
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TimeTable>>> GetEvents([FromQuery] DateTime start, [FromQuery] DateTime end)
+        public async Task<ActionResult<IEnumerable<Events>>> GetEvents([FromQuery] DateTime start, [FromQuery] DateTime end)
         {
-            return await _context.TimeTable
+            return await _context.Events
                 .Where(e => !((e.End <= start) || (e.Start >= end)))
                 .ToListAsync();
         }
 
         // GET: api/CalendarEvents/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TimeTable>> GetCalendarEvent(int id)
+        public async Task<ActionResult<Events>> GetCalendarEvent(int id)
         {
-            var calendarEvent = await _context.TimeTable.FindAsync(id);
+            var calendarEvent = await _context.Events.FindAsync(id);
 
             if (calendarEvent == null)
             {
@@ -78,9 +78,9 @@ namespace Project.Controllers
         // POST: api/CalendarEvents
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TimeTable>> PostCalendarEvent(TimeTable calendarEvent)
+        public async Task<ActionResult<Events>> PostCalendarEvent(Events calendarEvent)
         {
-            _context.TimeTable.Add(calendarEvent);
+            _context.Events.Add(calendarEvent);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCalendarEvent", new { id = calendarEvent.Id }, calendarEvent);
@@ -90,13 +90,13 @@ namespace Project.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCalendarEvent(int id)
         {
-            var calendarEvent = await _context.TimeTable.FindAsync(id);
+            var calendarEvent = await _context.Events.FindAsync(id);
             if (calendarEvent == null)
             {
                 return NotFound();
             }
 
-            _context.TimeTable.Remove(calendarEvent);
+            _context.Events.Remove(calendarEvent);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -104,7 +104,7 @@ namespace Project.Controllers
 
         private bool CalendarEventExists(int id)
         {
-            return _context.TimeTable.Any(e => e.Id == id);
+            return _context.Events.Any(e => e.Id == id);
         }
     }
 }

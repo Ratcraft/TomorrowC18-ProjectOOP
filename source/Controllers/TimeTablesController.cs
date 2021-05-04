@@ -1,41 +1,60 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Models;
-using Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Data;
+using Models;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
-    public class TimeTableController : Controller
+    public class TimeTablesController : Controller
     {
         private readonly Context _context;
 
-        public TimeTableController(Context context)
+        public TimeTablesController(Context context)
         {
             _context = context;
         }
 
-        // Get : TimeTable
-        public IActionResult Index()
+        // GET: TimeTables
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _context.TimeTable.ToListAsync());
         }
 
-        // GET: TimeTable/Create
+        // GET: TimeTables/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var timeTable = await _context.TimeTable
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (timeTable == null)
+            {
+                return NotFound();
+            }
+
+            return View(timeTable);
+        }
+
+        // GET: TimeTables/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: TimeTable/Create
+        // POST: TimeTables/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id, Start, End, Text, Color")] TimeTable timeTable)
+        public async Task<IActionResult> Create([Bind("Id,Start,End,Text,Color")] TimeTable timeTable)
         {
             if (ModelState.IsValid)
             {
@@ -46,7 +65,7 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(timeTable);
         }
 
-        // GET: TimeTable/Edit/5
+        // GET: TimeTables/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -62,12 +81,12 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(timeTable);
         }
 
-        // POST: TimeTable/Edit/5
+        // POST: TimeTables/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id, Start, End, Text, Color")] TimeTable timeTable)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Start,End,Text,Color")] TimeTable timeTable)
         {
             if (id != timeTable.Id)
             {
@@ -97,7 +116,7 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(timeTable);
         }
 
-        // GET: TimeTable/Delete/5
+        // GET: TimeTables/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -115,7 +134,7 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(timeTable);
         }
 
-        // POST: TimeTable/Delete/5
+        // POST: TimeTables/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

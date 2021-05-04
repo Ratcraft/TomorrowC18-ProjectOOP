@@ -1,4 +1,4 @@
-﻿@inject SignInManager<IdentityUser> signInManager;
+﻿@inject SignInManager<Profile> signInManager;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li class="navbar-item">
-                    <a class="navbar-link" asp-area="" asp-controller="TimeTable" asp-action="Index">
+                    <a class="navbar-link" asp-area="" asp-controller="TimeTables" asp-action="Index">
                         <i class="far fa-calendar-alt navbar-icon"></i>
                         <span class="navbar-title">Time Table</span>
                     </a>
@@ -51,7 +51,7 @@
                         <span class="navbar-title">Payment</span>
                     </a>
                 </li>
-                @if (signInManager.IsSignedIn(User))
+                @if (signInManager.IsSignedIn(User)) 
                 {
                     <li class="navbar-item">
                         <form method="post" asp-action="logout" asp-controller="account" class="navbar-link">
@@ -69,6 +69,12 @@
                         <a asp-area="" asp-controller="Account" asp-action="Login" class="navbar-link">
                             <i class="fas fa-sign-in-alt navbar-icon"></i>
                             <span class="navbar-title">Login</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a asp-action"Register" asp-controller="Account" asp-action="Register" class="navbar-link">
+                            <i class="fas fa-sign-in-alt navbar-icon"></i>
+                            <span class="navbar-title">Register</span>
                         </a>
                     </li>
                 }
@@ -100,6 +106,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Head", required: false)
 </body>
 </html>

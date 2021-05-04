@@ -11,6 +11,8 @@ namespace TomorrowC18ProjectOOP.Controllers
 {
     public class AdminController : Controller
     {
+
+
         private readonly Context _context;
 
         public AdminController(Context context)
@@ -65,9 +67,9 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess")] Admin admin)
+        public async Task<IActionResult> Edit(string id, [Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess")] Admin admin)
         {
-            if (id != admin.id)
+            if (id != admin.Id)
             {
                 return NotFound();
             }
@@ -81,7 +83,7 @@ namespace TomorrowC18ProjectOOP.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AdminExists(admin.id))
+                    if (!AdminExists(admin.Id))
                     {
                         return NotFound();
                     }
@@ -98,7 +100,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // POST: Admin/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var admin = await _context.Admin.FindAsync(id);
             _context.Admin.Remove(admin);
@@ -106,9 +108,9 @@ namespace TomorrowC18ProjectOOP.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AdminExists(int id)
+        private bool AdminExists(string id)
         {
-            return _context.Admin.Any(e => e.id == id);
+            return _context.Admin.Any(e => e.Id == id);
         }
     }
 }

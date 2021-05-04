@@ -31,7 +31,7 @@ namespace TomorrowC18ProjectOOP
             services.AddDbContext<Context>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("Context")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<Profile, IdentityRole>()
                 .AddEntityFrameworkStores<Context>();
         }
 

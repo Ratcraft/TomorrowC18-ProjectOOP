@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Data
 {
-    public class Context : IdentityDbContext
+    public class Context : IdentityDbContext<Profile>
     {
         public Context(DbContextOptions<Context> options) : base(options)
         {
@@ -33,7 +33,7 @@ namespace Data
         public DbSet<Exam> Exam { get; set; }
         public DbSet<Result> Result { get; set; }
         public DbSet<TimeTable> TimeTable { get; set; }
-
+        public DbSet<Events> Events { get; set; }
         public DbSet<Form> Form {get; set; }
     }
 }
