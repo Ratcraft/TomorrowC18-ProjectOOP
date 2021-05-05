@@ -106,6 +106,13 @@
             return;
         }
 
+        // add course lesson plan
+        var cours = prompt("Course lesson plan:", "")
+        dp.clearSelection();
+
+        var more = prompt("More:", "")
+        dp.clearSelection();
+
         DayPilot.Http.ajax({
             url: "/api/CalendarEvents",
             method: "POST",
@@ -116,19 +123,64 @@
             },
             success: function (ajax) {
                 var data = ajax.data;
-                dp.events.add(new DayPilot.Event({
-                    start: args.start,
-                    end: args.end,
-                    id: data.id,
-                    text: name
-                }));
+                if (cours && more) {
+                    dp.events.add(new DayPilot.Event({
+                        start: args.start,
+                        end: args.end,
+                        id: data.id,
+                        text: name + "<br> <br> Course lesson plan:<br>" + cours + "<br> <br> More:<br>" + more
+                    }));
+                }
+                else if (!cours && !more) {
+                    dp.events.add(new DayPilot.Event({
+                        start: args.start,
+                        end: args.end,
+                        id: data.id,
+                        text: name
+                    }));
+                }
+                else if (!cours && more) {
+                    dp.events.add(new DayPilot.Event({
+                        start: args.start,
+                        end: args.end,
+                        id: data.id,
+                        text: name + "<br> <br> More:<br>" + more
+                    }));
+                }
+                else {
+                    dp.events.add(new DayPilot.Event({
+                        start: args.start,
+                        end: args.end,
+                        id: data.id,
+                        text: name + "<br> <br> Course lesson plan:<br>" + cours
+                    }));
+                }
                 console.log("Created.");
             }
         });
     };
 
+    // Course Lesson Plan
     dp.onEventClick = function (args) {
-        alert("clicked: " + args.e.id());
+        var name = prompt("Course lesson plan:", "")
+        dp.clearSelection();
+        if (!name) {
+            return;
+        }
+
+        DayPilot.Http.ajax({
+            url: "/api/CalendarEvents/" + args.e.id(),
+            method: "PUT",
+            data: {
+                id: args.e.id(),
+                start: args.e.start,
+                end: args.e.end,
+                text: args.e.text() + "\n " + name
+            },
+            success: function () {
+                console.log("Course lesson plan added.");
+            }
+        });
     };
 
     dp.init();
