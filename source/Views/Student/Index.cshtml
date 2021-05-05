@@ -1,8 +1,10 @@
-﻿@model Models.Student;
+﻿@model Models.Profile;
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Your profile</h1>
 
-<p>This is the student profile page</p>
+
+<p>@Html.DisplayFor(model => model.firstName)</p>
+
