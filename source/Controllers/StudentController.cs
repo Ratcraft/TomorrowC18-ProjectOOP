@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 using Models;
 using Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
     public class StudentController : Controller
     {
         private readonly Context _context;
-
-        public StudentController(Context context)
+        private readonly UserManager<Profile> userManager;
+        public StudentController(Context context, UserManager<Profile> _userManager)
         {
             _context = context;
+            userManager = _userManager;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var userid = userManager.GetUserId(HttpContext.User);
+            Profile user = userManager.FindByIdAsync(userid).Result;
+            return View(user);
         }
         
         public IActionResult Create()
