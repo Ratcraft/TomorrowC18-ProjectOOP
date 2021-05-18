@@ -7,25 +7,34 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Data;
 using Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
-    public class TimeTablesController : Controller
+    public class CoursesController : Controller
     {
         private readonly Context _context;
+        private readonly UserManager<Profile> userManager;
 
-        public TimeTablesController(Context context)
+        public CoursesController(Context context, UserManager<Profile> _userManager)
         {
             _context = context;
+            userManager = _userManager;
         }
 
-        // GET: TimeTables
+        // GET: Course
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TimeTable.ToListAsync());
+            var course = await _context.Course.ToListAsync();
+            var userid = userManager.GetUserId(HttpContext.User);
+            Profile user = userManager.FindByIdAsync(userid).Result;
+
+            List<Course> result = new List<Course>();
+            
+            return View();
         }
 
-        // GET: TimeTables/Details/5
+        // GET: Courses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +42,39 @@ namespace TomorrowC18ProjectOOP.Controllers
                 return NotFound();
             }
 
-            var timeTable = await _context.TimeTable
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (timeTable == null)
+            var course = await _context.Course
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return View(timeTable);
+            return View(course);
         }
 
-        // GET: TimeTables/Create
+        // GET: Courses/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: TimeTables/Create
+        // POST: Courses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Start,End,Text,Color")] TimeTable timeTable)
+        public async Task<IActionResult> Create([Bind("id,teachername,group,begin,duration,courseName,description")] Course course)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(timeTable);
+                _context.Add(course);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(timeTable);
+            return View(course);
         }
 
-        // GET: TimeTables/Edit/5
+        // GET: Courses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +82,22 @@ namespace TomorrowC18ProjectOOP.Controllers
                 return NotFound();
             }
 
-            var timeTable = await _context.TimeTable.FindAsync(id);
-            if (timeTable == null)
+            var course = await _context.Course.FindAsync(id);
+            if (course == null)
             {
                 return NotFound();
             }
-            return View(timeTable);
+            return View(course);
         }
 
-        // POST: TimeTables/Edit/5
+        // POST: Courses/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Start,End,Text,Color")] TimeTable timeTable)
+        public async Task<IActionResult> Edit(int id, [Bind("id,teachername,group,begin,duration,courseName,description")] Course course)
         {
-            if (id != timeTable.Id)
+            if (id != course.id)
             {
                 return NotFound();
             }
@@ -97,12 +106,12 @@ namespace TomorrowC18ProjectOOP.Controllers
             {
                 try
                 {
-                    _context.Update(timeTable);
+                    _context.Update(course);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TimeTableExists(timeTable.Id))
+                    if (!CourseExists(course.id))
                     {
                         return NotFound();
                     }
@@ -113,10 +122,10 @@ namespace TomorrowC18ProjectOOP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(timeTable);
+            return View(course);
         }
 
-        // GET: TimeTables/Delete/5
+        // GET: Courses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +133,30 @@ namespace TomorrowC18ProjectOOP.Controllers
                 return NotFound();
             }
 
-            var timeTable = await _context.TimeTable
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (timeTable == null)
+            var course = await _context.Course
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return View(timeTable);
+            return View(course);
         }
 
-        // POST: TimeTables/Delete/5
+        // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var timeTable = await _context.TimeTable.FindAsync(id);
-            _context.TimeTable.Remove(timeTable);
+            var course = await _context.Course.FindAsync(id);
+            _context.Course.Remove(course);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TimeTableExists(int id)
+        private bool CourseExists(int id)
         {
-            return _context.TimeTable.Any(e => e.Id == id);
+            return _context.Course.Any(e => e.id == id);
         }
     }
 }

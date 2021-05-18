@@ -12,13 +12,13 @@ namespace Models
         [Required]
         public int id { get; set; }
         [Required]
-        public int teacherId { get; set; }
+        public string teachername { get; set; }
         [Required]
-        public int studentId { get; set; }
+        public string group { get; set; }
         [Required]
         public DateTime begin { get; set; }
         [Required]
-        public DateTime end { get; set; }
+        public int duration { get; set; }
         [Required]
         public string courseName { get; set; }
         public string description { get; set; }
