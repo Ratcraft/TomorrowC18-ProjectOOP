@@ -22,7 +22,7 @@ main {
 }
 
 .navbar {
-    width: 5rem;
+    width: 12rem;
     position: fixed;
     top: 0px;
     left: 0px;
@@ -33,7 +33,7 @@ main {
 }
 
 .navbar:hover {
-    width: 12rem;
+    width: 10rem;
 }
 
 .navbar-menu {
@@ -56,9 +56,9 @@ main {
     background-color: var(--navbar-item-hovered-color);
 }
 
-    .navbar-item:last-child {
-        margin-top: auto;
-    }
+.navbar-item:last-child {
+    margin-top: auto;
+}
 
 .navbar-link {
     display: flex;
@@ -90,10 +90,10 @@ main {
     background: var(--navbar-logo-color);
 }
 
-    .logo .navbar-title {
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
+.logo .navbar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
 
 .navbar:hover .logo .navbar-icon {
     transform: rotate(180deg);

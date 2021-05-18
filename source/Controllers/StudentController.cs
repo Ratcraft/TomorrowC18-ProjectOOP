@@ -26,7 +26,7 @@ namespace TomorrowC18ProjectOOP.Controllers
             Profile user = userManager.FindByIdAsync(userid).Result;
             return View(user);
         }
-        
+
         public IActionResult Create()
         {
             return View();

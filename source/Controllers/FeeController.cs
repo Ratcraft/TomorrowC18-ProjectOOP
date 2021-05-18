@@ -1,28 +1,60 @@
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Models;
-using Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Data;
+using Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
     public class FeeController : Controller
     {
         private readonly Context _context;
-
-        public FeeController(Context context)
+        private readonly UserManager<Profile> userManager;
+        public FeeController(Context context, UserManager<Profile> _userManager)
         {
             _context = context;
+            userManager = _userManager;
         }
 
+        // GET: Fees
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Fee.ToListAsync());
+            var fee = await _context.Fee.ToListAsync();
+            var userid = userManager.GetUserId(HttpContext.User);
+            Profile user = userManager.FindByIdAsync(userid).Result;
+
+            List<Fee> result = new List<Fee>();
+            foreach (var item in fee)
+            {
+                if (item.facultyId == user.Id) { result.Add(item); }
+            }
+            return View(result);
         }
 
+        // GET: Fee/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var fee = await _context.Fee
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (fee == null)
+            {
+                return NotFound();
+            }
+
+            return View(fee);
+        }
+
+        // GET: Fee/Create
         public IActionResult Create()
         {
             return View();
@@ -33,7 +65,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id, facultyId, amount, deadline, description")] Fee fee)
+        public async Task<IActionResult> Create([Bind("id,facultyId,amount,deadline,description,ispayed")] Fee fee)
         {
             if (ModelState.IsValid)
             {
@@ -60,14 +92,14 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(fee);
         }
 
-        // POST: fee/Edit/5
+        // POST: Fee/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int Id, [Bind("id, facultyId, amount, description, deadline")] Fee fee)
+        public async Task<IActionResult> Edit(int id, [Bind("id,facultyId,amount,deadline,description,ispayed")] Fee fee)
         {
-            if (Id != fee.id)
+            if (id != fee.id)
             {
                 return NotFound();
             }
@@ -95,24 +127,7 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(fee);
         }
 
-
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var fee = await _context.Fee
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (fee == null)
-            {
-                return NotFound();
-            }
-
-            return View(fee);
-        }
-
+        // GET: Fee/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,7 +145,7 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(fee);
         }
 
-        // POST: fee/Delete/5
+        // POST: Fee/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -147,3 +162,8 @@ namespace TomorrowC18ProjectOOP.Controllers
         }
     }
 }
+
+/*
+ * Edited by Tony and Alexis
+ * Views done by Alexis and Anjara
+*/

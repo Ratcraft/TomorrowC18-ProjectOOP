@@ -1,7 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@model Models.Fee
+﻿@model Models.Fee
 
 @{
     ViewData["Title"] = "Create";
@@ -9,17 +6,12 @@
 
 <h1>Create</h1>
 
-<h4>Payments and Fees</h4>
+<h4>Fee</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="description" class="control-label"></label>
-                <input asp-for="description" class="form-control" />
-                <span asp-validation-for="description" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="facultyId" class="control-label"></label>
                 <input asp-for="facultyId" class="form-control" />
@@ -36,6 +28,16 @@
                 <span asp-validation-for="deadline" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="description" class="control-label"></label>
+                <input asp-for="description" class="form-control" />
+                <span asp-validation-for="description" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ispayed" /> @Html.DisplayNameFor(model => model.ispayed)
+                </label>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -46,6 +48,3 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

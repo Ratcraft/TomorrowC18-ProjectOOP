@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TomorrowC18ProjectOOP</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/oui.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
@@ -74,6 +75,12 @@
                         <a asp-area="" asp-controller="Account" asp-action="Login" class="navbar-link">
                             <i class="fas fa-sign-in-alt navbar-icon"></i>
                             <span class="navbar-title">Login</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a asp-area="" asp-controller="Account" asp-action="Register" class="navbar-link">
+                            <i class="fas fa-sign-in-alt navbar-icon"></i>
+                            <span class="navbar-title">Register</span>
                         </a>
                     </li>
                 }

@@ -13,7 +13,7 @@ namespace Models
         public int id { get; set; }
 
         [Required]
-        public int facultyId { get; set; }
+        public string facultyId { get; set; }
 
         [Required]
         public int amount { get; set; }
@@ -23,10 +23,13 @@ namespace Models
 
         [Required]
         public string description { get; set; }
+
+        [Required]
+        public bool ispayed { get; set; }
     }
 }
 
 
 /*
-Edited by Tony
+Edited by Tony and Alexis
 */

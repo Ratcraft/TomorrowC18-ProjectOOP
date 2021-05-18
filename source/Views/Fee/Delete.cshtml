@@ -1,7 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@model Models.Fee
+﻿@model Models.Fee
 
 @{
     ViewData["Title"] = "Delete";
@@ -9,32 +6,43 @@
 
 <h1>Delete</h1>
 
+<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Payments and Fees</h4>
+    <h4>Fee</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.description)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.facultyId)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.description)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.facultyId)
         </dd>
-        <dt class="col-sm-2">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.amount)
         </dt>
-        <dd class="col-sm-10">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.amount)
         </dd>
-        <dt class="col-sm-2">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.deadline)
         </dt>
-        <dd class="col-sm-10">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.deadline)
         </dd>
-        
-
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ispayed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ispayed)
+        </dd>
     </dl>
-
+    
     <form asp-action="Delete">
         <input type="hidden" asp-for="id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
