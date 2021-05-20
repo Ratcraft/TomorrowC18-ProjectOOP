@@ -14,3 +14,5 @@ namespace Models
         public string Color { get; set; }
     }
 }
+
+/* 23730 Léo Mermet */

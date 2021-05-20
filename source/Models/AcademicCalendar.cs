@@ -19,3 +19,5 @@ namespace Models
         public DateTime EndDate { get; set; }
     }
 }
+
+/* 23730 Léo Mermet */
