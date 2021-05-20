@@ -20,11 +20,30 @@ namespace TomorrowC18ProjectOOP.Controllers
             userManager = _userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var userid = userManager.GetUserId(HttpContext.User);
             Profile user = userManager.FindByIdAsync(userid).Result;
-            return View(user);
+            var examList = await _context.Exam.ToListAsync();
+
+            List<string> subjects = user.subjectList.Split(new char[] { ',' }).ToList();
+
+            Dictionary<String, List<Exam>> grades = new Dictionary<string, List<Exam>>();
+            foreach (string subject in subjects)
+            {
+                List<Exam> exams = new List<Exam>();
+                grades.Add(subject, exams);
+            }
+
+            foreach (var item in examList)
+            {
+                if (grades.ContainsKey(item.CourseName) && item.StudentId.ToString() == userid)
+                {
+                    grades[item.CourseName].Add(item);
+                }
+            }
+
+            return View(grades);
         }
 
         public IActionResult Create()
@@ -37,7 +56,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess, group, progress, subjectList")] Student student)
+        public async Task<IActionResult> Create([Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess, group, progress, subjectList")] Profile student)
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +75,7 @@ namespace TomorrowC18ProjectOOP.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Student.FindAsync(id);
+            var student = await _context.Profile.FindAsync(id);
             if (student == null)
             {
                 return NotFound();
@@ -69,7 +88,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess, group, progress, subjectList")] Student student)
+        public async Task<IActionResult> Edit(string id, [Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess, group, progress, subjectList")] Profile student)
         {
             if (id != student.Id)
             {
@@ -104,19 +123,19 @@ namespace TomorrowC18ProjectOOP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var student = await _context.Student.FindAsync(id);
-            _context.Student.Remove(student);
+            var student = await _context.Profile.FindAsync(id);
+            _context.Profile.Remove(student);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool StudentExists(string id)
         {
-            return _context.Student.Any(e => e.Id == id);
+            return _context.Profile.Any(e => e.Id == id);
         }
     }
 }
 
 /*
- * Edited by Alexis
+ * Edited by Alexis/Thibault
 */
