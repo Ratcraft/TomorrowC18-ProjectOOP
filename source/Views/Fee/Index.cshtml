@@ -26,25 +26,28 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.deadline)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ispayed)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Pay</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.deadline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ispayed)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id">Pay</a> |
+                    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@* Done by Alexis *@
