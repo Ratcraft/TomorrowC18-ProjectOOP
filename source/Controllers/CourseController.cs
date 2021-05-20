@@ -11,12 +11,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
-    public class CoursesController : Controller
+    public class CourseController : Controller
     {
         private readonly Context _context;
         private readonly UserManager<Profile> userManager;
-
-        public CoursesController(Context context, UserManager<Profile> _userManager)
+        public CourseController(Context context, UserManager<Profile> _userManager)
         {
             _context = context;
             userManager = _userManager;
@@ -30,11 +29,15 @@ namespace TomorrowC18ProjectOOP.Controllers
             Profile user = userManager.FindByIdAsync(userid).Result;
 
             List<Course> result = new List<Course>();
-            
-            return View();
+            foreach (var item in course)
+            {
+                if (item.studentid == user.Id) { result.Add(item); }
+            }
+
+            return View(result);
         }
 
-        // GET: Courses/Details/5
+        // GET: Course/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -52,18 +55,18 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(course);
         }
 
-        // GET: Courses/Create
+        // GET: Course/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Courses/Create
+        // POST: Course/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,teachername,group,begin,duration,courseName,description")] Course course)
+        public async Task<IActionResult> Create([Bind("id,teachername,studentid,begin,duration,courseName,description")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +77,7 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(course);
         }
 
-        // GET: Courses/Edit/5
+        // GET: Course/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,12 +93,12 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(course);
         }
 
-        // POST: Courses/Edit/5
+        // POST: Course/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,teachername,group,begin,duration,courseName,description")] Course course)
+        public async Task<IActionResult> Edit(int id, [Bind("id,teachername,studentid,begin,duration,courseName,description")] Course course)
         {
             if (id != course.id)
             {
@@ -125,7 +128,7 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(course);
         }
 
-        // GET: Courses/Delete/5
+        // GET: Course/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,7 +146,7 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(course);
         }
 
-        // POST: Courses/Delete/5
+        // POST: Course/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

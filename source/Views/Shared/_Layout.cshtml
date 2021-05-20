@@ -1,5 +1,4 @@
 ﻿@inject SignInManager<Profile> signInManager;
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +23,7 @@
                 </li>
                 @if (signInManager.IsSignedIn(User))
                 {
+                    
                     <li class="navbar-item">
                         <a class="navbar-link" asp-area="" asp-controller="Student" asp-action="Index">
                             <i class="fas fa-user-graduate navbar-icon"></i>
@@ -68,6 +68,7 @@
                             <span class="navbar-title">Admin</span>
                         </a>
                     </li>
+
                 }
                 else
                 {
@@ -84,6 +85,7 @@
                         </a>
                     </li>
                 }
+
                 <li class="navbar-item">
                     <a class="navbar-link" asp-area="" asp-controller="Form" asp-action="Create">
                         <i class="fas fa-envelope-open-text navbar-icon"></i>
