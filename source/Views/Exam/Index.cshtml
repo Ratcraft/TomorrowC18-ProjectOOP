@@ -1,27 +1,47 @@
-﻿@model Dictionary<String, List<Models.Exam>>
+﻿@model IEnumerable<Models.Exam>
+
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Your profile</h1>
-
+<h1>Your exams</h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => Model)
+                @Html.DisplayNameFor(model => model.CourseName)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+
         </tr>
     </thead>
     <tbody>
-        @foreach (KeyValuePair<String, List<Exam>> item in Model)
+        @foreach (var item in Model)
         {
-            <p>Subject : @item.Key</p>
-            @foreach (Exam ex in item.Value)
-            {
-                <p>Examen du @ex.Date : @ex.Grade</p>
-            }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+
+@* Done by Anjara *@

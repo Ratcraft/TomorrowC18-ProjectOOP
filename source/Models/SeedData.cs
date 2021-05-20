@@ -27,9 +27,7 @@ namespace Models
                         firstName = "Alexis",
                         lastName = "DUCHET",
                         birthDate = "22/06/2001",
-                        sex = "man",
-                        group = "TS4",
-                        subjectList = "Math, Bio"
+                        sex = "man"
                     }
 
                 );
