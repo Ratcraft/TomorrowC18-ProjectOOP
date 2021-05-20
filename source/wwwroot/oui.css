@@ -22,7 +22,7 @@ main {
 }
 
 .navbar {
-    width: 12rem;
+    width: 7rem;
     position: fixed;
     top: 0px;
     left: 0px;
@@ -33,7 +33,7 @@ main {
 }
 
 .navbar:hover {
-    width: 10rem;
+    width: 12rem;
 }
 
 .navbar-menu {
