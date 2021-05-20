@@ -23,6 +23,16 @@ namespace Models
         [Required]
         [Range(1, 3)]
         public int levelAccess {get; set; }
+
+        public string subject { get; set; }
+
+        public string groupList { get; set; }
+
+        public string group { get; set; }
+
+        public int progress { get; set; }
+
+        public string subjectList { get; set; }
     }
 }
 

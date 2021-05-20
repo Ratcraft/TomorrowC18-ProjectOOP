@@ -33,7 +33,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess, subject, groupList")] Teacher teacher)
+        public async Task<IActionResult> Create([Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess, subject, groupList")] Profile teacher)
         {
             if (ModelState.IsValid)
             {
@@ -52,7 +52,7 @@ namespace TomorrowC18ProjectOOP.Controllers
                 return NotFound();
             }
 
-            var teacher = await _context.Teacher.FindAsync(id);
+            var teacher = await _context.Profile.FindAsync(id);
             if (teacher == null)
             {
                 return NotFound();
@@ -65,7 +65,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess, subject, groupList")] Teacher teacher)
+        public async Task<IActionResult> Edit(string id, [Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess, subject, groupList")] Profile teacher)
         {
             if (id != teacher.Id)
             {
@@ -100,15 +100,15 @@ namespace TomorrowC18ProjectOOP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var teacher = await _context.Teacher.FindAsync(id);
-            _context.Teacher.Remove(teacher);
+            var teacher = await _context.Profile.FindAsync(id);
+            _context.Profile.Remove(teacher);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TeacherExists(string id)
         {
-            return _context.Teacher.Any(e => e.Id == id);
+            return _context.Profile.Any(e => e.Id == id);
         }
     }
 }

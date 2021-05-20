@@ -21,8 +21,6 @@ namespace Data
         }
 
         public DbSet<Profile> Profile { get; set; }
-        public DbSet<Student> Student { get; set; }
-        public DbSet<Teacher> Teacher { get; set; }
         public DbSet<Admin> Admin { get; set; }
         public DbSet<AcademicCalendar> AcademicCalendar { get; set; }
         public DbSet<CalendarEvent> CalendarEvent { get; set; }
