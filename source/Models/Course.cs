@@ -14,7 +14,7 @@ namespace Models
         [Required]
         public string teachername { get; set; }
         [Required]
-        public string studentid { get; set; }
+        public string group { get; set; }
         [Required]
         public DateTime begin { get; set; }
         [Required]

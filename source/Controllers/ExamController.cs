@@ -1,20 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Models;
-using Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Data;
+using Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
-    public class StudentController : Controller
+    public class ExamController : Controller
     {
         private readonly Context _context;
         private readonly UserManager<Profile> userManager;
-        public StudentController(Context context, UserManager<Profile> _userManager)
+        public ExamController(Context context, UserManager<Profile> _userManager)
         {
             _context = context;
             userManager = _userManager;
@@ -46,28 +47,47 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(grades);
         }
 
+        // GET: Exam/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var exam = await _context.Exam
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (exam == null)
+            {
+                return NotFound();
+            }
+
+            return View(exam);
+        }
+
+        // GET: Exam/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Student/Create
+        // POST: Exam/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess, group, progress, subjectList")] Profile student)
+        public async Task<IActionResult> Create([Bind("Id,StudentId,CourseName,Date,Grade")] Exam exam)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(student);
+                _context.Add(exam);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(student);
+            return View(exam);
         }
 
-        // GET: Student/Edit/5
+        // GET: Exam/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,22 +95,22 @@ namespace TomorrowC18ProjectOOP.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Profile.FindAsync(id);
-            if (student == null)
+            var exam = await _context.Exam.FindAsync(id);
+            if (exam == null)
             {
                 return NotFound();
             }
-            return View(student);
+            return View(exam);
         }
 
-        // POST: Student/Edit/5
+        // POST: Exam/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess, group, progress, subjectList")] Profile student)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,StudentId,CourseName,Date,Grade")] Exam exam)
         {
-            if (id != student.Id)
+            if (id != exam.Id)
             {
                 return NotFound();
             }
@@ -99,12 +119,12 @@ namespace TomorrowC18ProjectOOP.Controllers
             {
                 try
                 {
-                    _context.Update(student);
+                    _context.Update(exam);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StudentExists(student.Id))
+                    if (!ExamExists(exam.Id))
                     {
                         return NotFound();
                     }
@@ -115,27 +135,41 @@ namespace TomorrowC18ProjectOOP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(student);
+            return View(exam);
         }
 
-        // POST: student/Delete/5
+        // GET: Exam/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var exam = await _context.Exam
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (exam == null)
+            {
+                return NotFound();
+            }
+
+            return View(exam);
+        }
+
+        // POST: Exam/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var student = await _context.Profile.FindAsync(id);
-            _context.Profile.Remove(student);
+            var exam = await _context.Exam.FindAsync(id);
+            _context.Exam.Remove(exam);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StudentExists(string id)
+        private bool ExamExists(int id)
         {
-            return _context.Profile.Any(e => e.Id == id);
+            return _context.Exam.Any(e => e.Id == id);
         }
     }
 }
-
-/*
- * Edited by Alexis/Thibault
-*/

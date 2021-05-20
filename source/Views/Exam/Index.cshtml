@@ -1,0 +1,27 @@
+﻿@model Dictionary<String, List<Models.Exam>>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Your profile</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => Model)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (KeyValuePair<String, List<Exam>> item in Model)
+        {
+            <p>Subject : @item.Key</p>
+            @foreach (Exam ex in item.Value)
+            {
+                <p>Examen du @ex.Date : @ex.Grade</p>
+            }
+        }
+    </tbody>
+</table>

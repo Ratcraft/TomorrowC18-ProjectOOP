@@ -6,18 +6,28 @@ using System.Threading.Tasks;
 using Models;
 using Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
+
     public class AdminController : Controller
     {
+        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<Profile> userManager;
 
-
-        private readonly Context _context;
-
-        public AdminController(Context context)
+        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<Profile> userManager)
         {
-            _context = context;
+            this.roleManager = roleManager;
+            this.userManager = userManager;
+        }
+
+        [HttpGet]
+        public IActionResult ListRoles()
+        {
+            var roles = roleManager.Roles;
+            return View(roles);
         }
 
         public IActionResult Index()
@@ -30,87 +40,5 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View();
         }
         
-        // POST: Admin/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess")] Admin admin)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(admin);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(admin);
-        }
-
-        // GET: Admin/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var admin = await _context.Admin.FindAsync(id);
-            if (admin == null)
-            {
-                return NotFound();
-            }
-            return View(admin);
-        }
-
-        // POST: Admin/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("id, firstName, lastName, birthDate, sex, userName, emailAdress, password, passwordHash, levelAccess")] Admin admin)
-        {
-            if (id != admin.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(admin);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AdminExists(admin.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(admin);
-        }
-
-        // POST: Admin/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            var admin = await _context.Admin.FindAsync(id);
-            _context.Admin.Remove(admin);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool AdminExists(string id)
-        {
-            return _context.Admin.Any(e => e.Id == id);
-        }
     }
 }

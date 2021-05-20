@@ -23,7 +23,15 @@
                 </li>
                 @if (signInManager.IsSignedIn(User))
                 {
-                    
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="navbar-item">
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-link">
+                                <i class="fas fa-users-cog navbar-icon"></i>
+                                <span class="navbar-title">Admin</span>
+                            </a>
+                        </li>
+                    }
                     <li class="navbar-item">
                         <a class="navbar-link" asp-area="" asp-controller="Student" asp-action="Index">
                             <i class="fas fa-user-graduate navbar-icon"></i>
@@ -62,12 +70,7 @@
                             </button>
                         </form>
                     </li>
-                    <li class="navbar-item">
-                        <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-link">
-                            <i class="fas fa-users-cog navbar-icon"></i>
-                            <span class="navbar-title">Admin</span>
-                        </a>
-                    </li>
+                    
 
                 }
                 else

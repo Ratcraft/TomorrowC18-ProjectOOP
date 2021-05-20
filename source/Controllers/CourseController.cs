@@ -31,7 +31,7 @@ namespace TomorrowC18ProjectOOP.Controllers
             List<Course> result = new List<Course>();
             foreach (var item in course)
             {
-                if (item.studentid == user.Id) { result.Add(item); }
+                if (item.group == user.group) { result.Add(item); }
             }
 
             return View(result);

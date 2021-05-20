@@ -27,9 +27,9 @@ namespace Models
         public string subject { get; set; }
 
         public string groupList { get; set; }
-
+        [Required]
         public string group { get; set; }
-
+        [Required]
         public int progress { get; set; }
 
         public string subjectList { get; set; }
