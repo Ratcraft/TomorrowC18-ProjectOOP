@@ -21,7 +21,7 @@ namespace Models
         public string sex {get; set; }
 
         [Required]
-        [Range(1, 3)] /* 1 = Student, 2 = Teacher, 3 = Admin */
+        [Range(1, 3)]
         public int levelAccess {get; set; }
 
         public string subject { get; set; }

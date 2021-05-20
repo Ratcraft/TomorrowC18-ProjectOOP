@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Data;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -16,12 +15,10 @@ namespace TomorrowC18ProjectOOP.Controllers
     public class EventsController : Controller
     {
         private readonly Context _context;
-        private readonly UserManager<Profile> userManager;
 
-        public EventsController(Context context, UserManager<Profile> _userManager)
+        public EventsController(Context context)
         {
             _context = context;
-            userManager = _userManager;
         }
 
         // GET: api/Events
@@ -54,40 +51,34 @@ namespace TomorrowC18ProjectOOP.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEvent([FromRoute] int id, [FromBody] CalendarEvent @event)
         {
-            var userid = userManager.GetUserId(HttpContext.User);
-            Profile user = userManager.FindByIdAsync(userid).Result;
-            if (user.levelAccess != 1)
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
-                if (id != @event.Id)
-                {
-                    return BadRequest();
-                }
-
-                _context.Entry(@event).State = EntityState.Modified;
-
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EventExists(id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-
-                return NoContent();
+                return BadRequest(ModelState);
             }
+
+            if (id != @event.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(@event).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EventExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
             return NoContent();
         }
 
@@ -95,48 +86,36 @@ namespace TomorrowC18ProjectOOP.Controllers
         [HttpPost]
         public async Task<IActionResult> PostEvent([FromBody] CalendarEvent @event)
         {
-            var userid = userManager.GetUserId(HttpContext.User);
-            Profile user = userManager.FindByIdAsync(userid).Result;
-            if (user.levelAccess != 1)
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
-                _context.CalendarEvent.Add(@event);
-                await _context.SaveChangesAsync();
-
-                return CreatedAtAction("GetEvent", new { id = @event.Id }, @event);
+                return BadRequest(ModelState);
             }
-            return NoContent();
+
+            _context.CalendarEvent.Add(@event);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetEvent", new { id = @event.Id }, @event);
         }
 
         // DELETE: api/Events/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEvent([FromRoute] int id)
         {
-            var userid = userManager.GetUserId(HttpContext.User);
-            Profile user = userManager.FindByIdAsync(userid).Result;
-            if (user.levelAccess != 1)
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
-                var @event = await _context.CalendarEvent.SingleOrDefaultAsync(m => m.Id == id);
-                if (@event == null)
-                {
-                    return NotFound();
-                }
-
-                _context.CalendarEvent.Remove(@event);
-                await _context.SaveChangesAsync();
-
-                return Ok(@event);
+                return BadRequest(ModelState);
             }
-            return NoContent();
+
+            var @event = await _context.CalendarEvent.SingleOrDefaultAsync(m => m.Id == id);
+            if (@event == null)
+            {
+                return NotFound();
+            }
+
+            _context.CalendarEvent.Remove(@event);
+            await _context.SaveChangesAsync();
+
+            return Ok(@event);
         }
 
         private bool EventExists(int id)
@@ -148,42 +127,36 @@ namespace TomorrowC18ProjectOOP.Controllers
         [HttpPut("{id}/move")]
         public async Task<IActionResult> MoveEvent([FromRoute] int id, [FromBody] EventMoveParams param)
         {
-            var userid = userManager.GetUserId(HttpContext.User);
-            Profile user = userManager.FindByIdAsync(userid).Result;
-            if (user.levelAccess != 1)
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
+                return BadRequest(ModelState);
+            }
 
-                var @event = await _context.CalendarEvent.SingleOrDefaultAsync(m => m.Id == id);
-                if (@event == null)
+            var @event = await _context.CalendarEvent.SingleOrDefaultAsync(m => m.Id == id);
+            if (@event == null)
+            {
+                return NotFound();
+            }
+
+            @event.Start = param.Start;
+            @event.End = param.End;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EventExists(id))
                 {
                     return NotFound();
                 }
-
-                @event.Start = param.Start;
-                @event.End = param.End;
-
-                try
+                else
                 {
-                    await _context.SaveChangesAsync();
+                    throw;
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EventExists(id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-
-                return NoContent();
             }
+
             return NoContent();
         }
 
@@ -191,43 +164,38 @@ namespace TomorrowC18ProjectOOP.Controllers
         [HttpPut("{id}/color")]
         public async Task<IActionResult> SetEventColor([FromRoute] int id, [FromBody] EventColorParams param)
         {
-            var userid = userManager.GetUserId(HttpContext.User);
-            Profile user = userManager.FindByIdAsync(userid).Result;
-            if (user.levelAccess != 1)
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
+                return BadRequest(ModelState);
+            }
 
-                var @event = await _context.CalendarEvent.SingleOrDefaultAsync(m => m.Id == id);
-                if (@event == null)
+            var @event = await _context.CalendarEvent.SingleOrDefaultAsync(m => m.Id == id);
+            if (@event == null)
+            {
+                return NotFound();
+            }
+
+            @event.Color = param.Color;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EventExists(id))
                 {
                     return NotFound();
                 }
-
-                @event.Color = param.Color;
-
-                try
+                else
                 {
-                    await _context.SaveChangesAsync();
+                    throw;
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EventExists(id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-
-                return NoContent();
             }
+
             return NoContent();
         }
+
     }
 
     public class EventMoveParams
