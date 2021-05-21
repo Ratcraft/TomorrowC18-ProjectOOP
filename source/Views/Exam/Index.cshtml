@@ -20,8 +20,10 @@
             <p>Subject : @item.Key</p>
             @foreach (Exam ex in item.Value)
             {
-                <p>Examen du @ex.Date : @ex.Grade</p>
+                <p>For the test you had on the @ex.Date, you have   @ex.Grade /20</p>
             }
         }
     </tbody>
 </table>
+
+@*Done by Thibault*@
