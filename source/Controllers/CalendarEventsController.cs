@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Data;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -15,10 +16,12 @@ namespace TomorrowC18ProjectOOP.Controllers
     public class CalendarEventsController : ControllerBase
     {
         private readonly Context _context;
+        private readonly UserManager<Profile> userManager;
 
-        public CalendarEventsController(Context context)
+        public CalendarEventsController(Context context, UserManager<Profile> _userManager)
         {
             _context = context;
+            userManager = _userManager;
         }
 
         // GET: api/CalendarEvents
@@ -49,29 +52,35 @@ namespace TomorrowC18ProjectOOP.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCalendarEvent(int id, CalendarEvent calendarEvent)
         {
-            if (id != calendarEvent.Id)
+            var userid = userManager.GetUserId(HttpContext.User);
+            Profile user = userManager.FindByIdAsync(userid).Result;
+            if (user.levelAccess != 1)
             {
-                return BadRequest();
-            }
-
-            _context.Entry(calendarEvent).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CalendarEventExists(id))
+                if (id != calendarEvent.Id)
                 {
-                    return NotFound();
+                    return BadRequest();
                 }
-                else
-                {
-                    throw;
-                }
-            }
 
+                _context.Entry(calendarEvent).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CalendarEventExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return NoContent();
+            }
             return NoContent();
         }
 
@@ -80,25 +89,37 @@ namespace TomorrowC18ProjectOOP.Controllers
         [HttpPost]
         public async Task<ActionResult<Events>> PostCalendarEvent(Events calendarEvent)
         {
-            _context.Events.Add(calendarEvent);
-            await _context.SaveChangesAsync();
+            var userid = userManager.GetUserId(HttpContext.User);
+            Profile user = userManager.FindByIdAsync(userid).Result;
+            if (user.levelAccess != 1)
+            {
+                _context.Events.Add(calendarEvent);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCalendarEvent", new { id = calendarEvent.Id }, calendarEvent);
+                return CreatedAtAction("GetCalendarEvent", new { id = calendarEvent.Id }, calendarEvent);
+            }
+            return NoContent();
         }
 
         // DELETE: api/CalendarEvents/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCalendarEvent(int id)
         {
-            var calendarEvent = await _context.Events.FindAsync(id);
-            if (calendarEvent == null)
+            var userid = userManager.GetUserId(HttpContext.User);
+            Profile user = userManager.FindByIdAsync(userid).Result;
+            if (user.levelAccess != 1)
             {
-                return NotFound();
+                var calendarEvent = await _context.Events.FindAsync(id);
+                if (calendarEvent == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Events.Remove(calendarEvent);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-
-            _context.Events.Remove(calendarEvent);
-            await _context.SaveChangesAsync();
-
             return NoContent();
         }
 
