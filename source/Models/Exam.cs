@@ -15,6 +15,8 @@ namespace Models
         [Required]
         public string StudentId { get; set; }
 
+        public string StudentName { get; set; }
+
         [Required]
         public string CourseName { get; set; }
 
