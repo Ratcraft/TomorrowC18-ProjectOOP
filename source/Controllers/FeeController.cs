@@ -164,6 +164,5 @@ namespace TomorrowC18ProjectOOP.Controllers
 }
 
 /*
- * Edited by Tony and Alexis
- * Views done by Alexis and Anjara
+ * Edited by Tony and Alexis DUCHET 23707
 */
