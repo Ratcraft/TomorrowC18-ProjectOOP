@@ -32,7 +32,7 @@ namespace TomorrowC18ProjectOOP.Controllers
 
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult CreateRole()
         {
             return View();
         }
@@ -52,7 +52,7 @@ namespace TomorrowC18ProjectOOP.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("index", "home");
+                    return RedirectToAction("Index");
                 }
 
                 foreach (IdentityError error in result.Errors)
