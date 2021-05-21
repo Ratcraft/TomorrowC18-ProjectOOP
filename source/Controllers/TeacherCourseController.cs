@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Teacher,Admin")]
     public class TeacherCourseController : Controller
     {
         private readonly Context _context;
