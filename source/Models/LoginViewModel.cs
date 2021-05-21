@@ -20,3 +20,5 @@ namespace Models
         public bool RememberMe { get; set; }
     }
 }
+
+// Edited by Louis Ribault

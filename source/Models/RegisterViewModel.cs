@@ -23,3 +23,5 @@ namespace Models
         public string ConfirmPassword { get; set; }
     }
 }
+
+// Edited by Louis Ribault
