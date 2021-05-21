@@ -11,7 +11,7 @@ namespace Models
         [Key]
         [Required]
         public int id { get; set; }
-        [Required]
+        //[Required]
         public string teachername { get; set; }
         [Required]
         public string group { get; set; }

@@ -4,18 +4,13 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Teacher Course : Create a course</h1>
+<h1>Teacher Course : Create YOUR course</h1>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="teachername" class="control-label"></label>
-                <input asp-for="teachername" class="form-control" />
-                <span asp-validation-for="teachername" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="group" class="control-label"></label>
                 <input asp-for="group" class="form-control" />

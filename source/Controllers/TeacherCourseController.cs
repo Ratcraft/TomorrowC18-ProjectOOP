@@ -27,6 +27,21 @@ namespace TomorrowC18ProjectOOP.Controllers
             return View(await _context.Course.ToListAsync());
         }
 
+        public async Task<IActionResult> TeacherIndex()
+        {
+            var course = await _context.Course.ToListAsync();
+            var userid = userManager.GetUserId(HttpContext.User);
+            Profile user = userManager.FindByIdAsync(userid).Result;
+
+            List<Course> result = new List<Course>();
+            foreach (var item in course)
+            {
+                if (item.teachername == user.UserName) { result.Add(item); }
+            }
+
+            return View(result);
+        }
+
         // GET: Course/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -57,6 +72,23 @@ namespace TomorrowC18ProjectOOP.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,teachername,group,begin,duration,courseName,description")] Course course)
+        {
+            if (ModelState.IsValid)
+            {
+                /*
+                var userid = userManager.GetUserId(HttpContext.User);
+                Profile user = userManager.FindByIdAsync(userid).Result;
+                course.teachername = user.UserName;*/
+                _context.Add(course);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(course);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TeacherCreate([Bind("id,teachername,group,begin,duration,courseName,description")] Course course)
         {
             if (ModelState.IsValid)
             {
