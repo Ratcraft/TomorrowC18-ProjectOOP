@@ -21,3 +21,6 @@ namespace Models
         public List<string> Users { get; set; }
     }
 }
+
+
+// Edited By Louis Ribault 23732

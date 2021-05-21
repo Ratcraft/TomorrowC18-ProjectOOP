@@ -12,3 +12,5 @@ namespace Models
         public bool IsSelected { get; set; }
     }
 }
+
+//Edited by Louis Ribault 23732

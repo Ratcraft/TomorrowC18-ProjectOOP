@@ -9,3 +9,5 @@ namespace Models
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }
+
+//Edited by Louis Ribault 23732
