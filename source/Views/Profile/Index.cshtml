@@ -1,0 +1,59 @@
+﻿@model Models.Profile
+
+<h1>Here is your Profile</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.firstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.birthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.group)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.birthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.sex)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.group)
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+@* Done by Louis *@
