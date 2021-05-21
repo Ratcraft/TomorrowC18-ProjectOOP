@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Models.Course>
+﻿@model Models.TeacherCourseVM
 
 @{
     ViewData["Title"] = "Index";
@@ -15,32 +15,44 @@
 </p>
 
 
+<form asp-controller="TeacherCourse" asp-action="Index" method="get">
+    <p>
+
+
+        Title: <input type="text" name="searchString" />
+        <input type="submit" value="Filter" />
+
+    </p>
+
+
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.courseName)
+                @Html.DisplayNameFor(model => model.courses[0].courseName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.group)
+                @Html.DisplayNameFor(model => model.courses[0].group)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.teachername)
+                @Html.DisplayNameFor(model => model.courses[0].teachername)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.begin)
+                @Html.DisplayNameFor(model => model.courses[0].begin)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.duration)
+                @Html.DisplayNameFor(model => model.courses[0].duration)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.description)
+                @Html.DisplayNameFor(model => model.courses[0].description)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.courses)
         {
         <tr>
             <td>

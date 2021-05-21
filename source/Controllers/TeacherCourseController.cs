@@ -22,9 +22,22 @@ namespace TomorrowC18ProjectOOP.Controllers
         }
 
         // GET: Course
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Course.ToListAsync());
+            var courses = from currentMovieItem in _context.Course select currentMovieItem;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                courses = courses.Where(s => s.courseName.Contains(searchString)); // still deferred, but query updated
+            }
+
+            var teachercoursevm = new TeacherCourseVM
+            {
+                courses = await courses.ToListAsync()
+
+            };
+
+            return View(teachercoursevm);
         }
 
         public async Task<IActionResult> TeacherIndex()
