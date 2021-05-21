@@ -111,7 +111,7 @@ namespace TomorrowC18ProjectOOP.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("ListRoles");
+                    return RedirectToAction("Index");
                 }
 
                 foreach (var error in result.Errors)
