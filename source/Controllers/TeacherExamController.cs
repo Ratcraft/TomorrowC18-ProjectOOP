@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Teacher,Admin")]
     public class TeacherExamController : Controller
     {
         private readonly Context _context;
@@ -57,10 +57,16 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StudentId,CourseName,Date,Grade")] Exam exam)
+        public async Task<IActionResult> Create([Bind("Id,StudentId,StudentName,CourseName,Date,Grade")] Exam exam)
         {
             if (ModelState.IsValid)
             {
+                Profile student = await _context.Profile.FindAsync(exam.StudentId);
+                if (student == null)
+                {
+                    return NotFound();
+                }
+                exam.StudentName = student.UserName;
                 _context.Add(exam);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -89,7 +95,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StudentId,CourseName,Date,Grade")] Exam exam)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,StudentId,StudentName,CourseName,Date,Grade")] Exam exam)
         {
             if (id != exam.Id)
             {
@@ -100,6 +106,8 @@ namespace TomorrowC18ProjectOOP.Controllers
             {
                 try
                 {
+                    Profile student = await _context.Profile.FindAsync(id);
+                    exam.StudentName = student.UserName;
                     _context.Update(exam);
                     await _context.SaveChangesAsync();
                 }

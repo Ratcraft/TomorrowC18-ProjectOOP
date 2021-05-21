@@ -76,7 +76,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StudentId,CourseName,Date,Grade")] Exam exam)
+        public async Task<IActionResult> Create([Bind("Id,StudentId,StudentName,CourseName,Date,Grade")] Exam exam)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +108,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StudentId,CourseName,Date,Grade")] Exam exam)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,StudentId,StudentName,CourseName,Date,Grade")] Exam exam)
         {
             if (id != exam.Id)
             {
