@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
-    public class CourseController : Controller
+    public class TeacherCourseController : Controller
     {
         private readonly Context _context;
         private readonly UserManager<Profile> userManager;
-        public CourseController(Context context, UserManager<Profile> _userManager)
+        public TeacherCourseController(Context context, UserManager<Profile> _userManager)
         {
             _context = context;
             userManager = _userManager;
@@ -31,7 +31,7 @@ namespace TomorrowC18ProjectOOP.Controllers
             List<Course> result = new List<Course>();
             foreach (var item in course)
             {
-                if (item.group == user.group) { result.Add(item); }
+                if (item.teachername == user.UserName) { result.Add(item); }
             }
 
             return View(result);
@@ -70,6 +70,9 @@ namespace TomorrowC18ProjectOOP.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userid = userManager.GetUserId(HttpContext.User);
+                Profile user = userManager.FindByIdAsync(userid).Result;
+                course.teachername = user.UserName;
                 _context.Add(course);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
