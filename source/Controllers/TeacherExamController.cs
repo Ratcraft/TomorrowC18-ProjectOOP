@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Data;
 using Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TeacherExamController : Controller
     {
         private readonly Context _context;

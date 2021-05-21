@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TomorrowC18ProjectOOP.Controllers
 {
-
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
