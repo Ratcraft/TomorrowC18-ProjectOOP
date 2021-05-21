@@ -124,7 +124,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditUsersInRole(string roleId)
+        public async Task<IActionResult> EditUsers(string roleId)
         {
             ViewBag.roleId = roleId;
 
@@ -162,7 +162,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditUsersInRole(List<UserRole> model, string roleId)
+        public async Task<IActionResult> EditUsers(List<UserRole> model, string roleId)
         {
             var role = await roleManager.FindByIdAsync(roleId);
 
