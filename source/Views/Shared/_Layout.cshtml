@@ -23,45 +23,39 @@
                 </li>
                 @if (signInManager.IsSignedIn(User))
                 {
-                    @if (User.IsInRole("Admin"))
+                    @if (User.IsInRole("Student"))
                     {
                         <li class="navbar-item">
-                            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-link">
-                                <i class="fas fa-users-cog navbar-icon"></i>
-                                <span class="navbar-title">Admin</span>
+                            <a class="navbar-link" asp-area="" asp-controller="Student" asp-action="Index">
+                                <i class="fas fa-user-graduate navbar-icon"></i>
+                                <span class="navbar-title">Profile</span>
+                            </a>
+                        </li>
+                        <li class="navbar-item">
+                            <a class="navbar-link" asp-area="" asp-controller="AcademicCalendar" asp-action="Index">
+                                <i class="fas fa-university navbar-icon"></i>
+                                <span class="navbar-title">Academic Calendar</span>
+                            </a>
+                        </li>
+                        <li class="navbar-item">
+                            <a class="navbar-link" asp-area="" asp-controller="Course" asp-action="Index">
+                                <i class="fas fa-book navbar-icon"></i>
+                                <span class="navbar-title">Courses</span>
+                            </a>
+                        </li>
+                        <li class="navbar-item">
+                            <a class="navbar-link" asp-area="" asp-controller="TimeTable" asp-action="Index">
+                                <i class="far fa-calendar-alt navbar-icon"></i>
+                                <span class="navbar-title">Time Table</span>
+                            </a>
+                        </li>
+                        <li class="navbar-item">
+                            <a class="navbar-link" asp-area="" asp-controller="Fee" asp-action="Index">
+                                <i class="fas fa-file-invoice-dollar navbar-icon"></i>
+                                <span class="navbar-title">Payment</span>
                             </a>
                         </li>
                     }
-                    <li class="navbar-item">
-                        <a class="navbar-link" asp-area="" asp-controller="Student" asp-action="Index">
-                            <i class="fas fa-user-graduate navbar-icon"></i>
-                            <span class="navbar-title">Profile</span>
-                        </a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="navbar-link" asp-area="" asp-controller="AcademicCalendar" asp-action="Index">
-                            <i class="fas fa-university navbar-icon"></i>
-                            <span class="navbar-title">Academic Calendar</span>
-                        </a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="navbar-link" asp-area="" asp-controller="Course" asp-action="Index">
-                            <i class="fas fa-book navbar-icon"></i>
-                            <span class="navbar-title">Courses</span>
-                        </a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="navbar-link" asp-area="" asp-controller="TimeTable" asp-action="Index">
-                            <i class="far fa-calendar-alt navbar-icon"></i>
-                            <span class="navbar-title">Time Table</span>
-                        </a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="navbar-link" asp-area="" asp-controller="Fee" asp-action="Index">
-                            <i class="fas fa-file-invoice-dollar navbar-icon"></i>
-                            <span class="navbar-title">Payment</span>
-                        </a>
-                    </li>
                     <li class="navbar-item">
                         <form method="post" asp-action="logout" asp-controller="account" class="navbar-link">
                             <button type="submit" style="width:auto">
@@ -70,7 +64,54 @@
                             </button>
                         </form>
                     </li>
-                    
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        <li class="navbar-item">
+                            <a class="navbar-link" asp-area="" asp-controller="TeacherCourse" asp-action="Index">
+                                <i class="fas fa-chalkboard-teacher navbar-icon"></i>
+                                <span class="navbar-title">Courses</span>
+                            </a>
+                        </li>
+                        <li class="navbar-item">
+                            <a class="navbar-link" asp-area="" asp-controller="TeacherExam" asp-action="Index">
+                                <i class="fas fa-graduation-cap navbar-icon"></i>
+                                <span class="navbar-title">Exam</span>
+                            </a>
+                        </li>
+                        <li class="navbar-item">
+                            <a class="navbar-link" asp-area="" asp-controller="AcademicCalendar" asp-action="Index">
+                                <i class="fas fa-university navbar-icon"></i>
+                                <span class="navbar-title">Academic Calendar</span>
+                            </a>
+                        </li>
+                        <li class="navbar-item">
+                            <a class="navbar-link" asp-area="" asp-controller="TimeTable" asp-action="Index">
+                                <i class="far fa-calendar-alt navbar-icon"></i>
+                                <span class="navbar-title">Time Table</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="navbar-item">
+                            <a class="navbar-link" asp-area="" asp-controller="Admin" asp-action="Index">
+                                <i class="fas fa-users-cog navbar-icon"></i>
+                                <span class="navbar-title">Admin</span>
+                            </a>
+                        </li>
+                        <li class="navbar-item">
+                            <a class="navbar-link" asp-area="" asp-controller="AcademicCalendar" asp-action="Index">
+                                <i class="fas fa-university navbar-icon"></i>
+                                <span class="navbar-title">Academic Calendar</span>
+                            </a>
+                        </li>
+                        <li class="navbar-item">
+                            <a class="navbar-link" asp-area="" asp-controller="TimeTable" asp-action="Index">
+                                <i class="far fa-calendar-alt navbar-icon"></i>
+                                <span class="navbar-title">Time Table</span>
+                            </a>
+                        </li>
+                    }
 
                 }
                 else
@@ -112,3 +153,5 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+@* *@
