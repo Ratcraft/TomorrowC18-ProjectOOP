@@ -26,7 +26,7 @@
                     @if (User.IsInRole("Student"))
                     {
                         <li class="navbar-item">
-                            <a class="navbar-link" asp-area="" asp-controller="Student" asp-action="Index">
+                            <a class="navbar-link" asp-area="" asp-controller="Profile" asp-action="Index">
                                 <i class="fas fa-user-graduate navbar-icon"></i>
                                 <span class="navbar-title">Profile</span>
                             </a>
@@ -47,6 +47,12 @@
                             <a class="navbar-link" asp-area="" asp-controller="TimeTable" asp-action="Index">
                                 <i class="far fa-calendar-alt navbar-icon"></i>
                                 <span class="navbar-title">Time Table</span>
+                            </a>
+                        </li>
+                        <li class="navbar-item">
+                            <a class="navbar-link" asp-area="" asp-controller="Exam" asp-action="Index">
+                                <i class="fas fa-graduation-cap navbar-icon"></i>
+                                <span class="navbar-title">Exam</span>
                             </a>
                         </li>
                         <li class="navbar-item">
