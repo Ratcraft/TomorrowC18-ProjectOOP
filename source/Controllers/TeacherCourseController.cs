@@ -24,17 +24,7 @@ namespace TomorrowC18ProjectOOP.Controllers
         // GET: Course
         public async Task<IActionResult> Index()
         {
-            var course = await _context.Course.ToListAsync();
-            var userid = userManager.GetUserId(HttpContext.User);
-            Profile user = userManager.FindByIdAsync(userid).Result;
-
-            List<Course> result = new List<Course>();
-            foreach (var item in course)
-            {
-                if (item.teachername == user.UserName) { result.Add(item); }
-            }
-
-            return View(result);
+            return View(await _context.Course.ToListAsync());
         }
 
         // GET: Course/Details/5
